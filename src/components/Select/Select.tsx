@@ -7,14 +7,15 @@ import { usePopperTooltip } from "react-popper-tooltip";
 import { SelectComponentOption } from "../../types";
 
 import { ISelect } from "./types";
+
 import {
   InputStyles,
   InputHover,
   InputPlaceholder,
   InputFocus,
   InputTransitions,
+  InputTypography,
 } from "../styles";
-import { InputTypography } from "../styles";
 
 const tooltipStyles = {
   width: "200px",
@@ -31,21 +32,41 @@ const Select: React.FC<ISelect> = (props) => {
     options = [],
     onChange = Function.prototype,
     placeholder = "Select value...",
+    name,
   } = props;
 
-  const [visible, setVisible] = React.useState(false);
+  const selectRef = React.useRef<HTMLInputElement>(null);
+  const [option, setOption] = React.useState<SelectComponentOption>();
+  const [visible, setVisible] = React.useState<boolean>(false);
 
   const { getTooltipProps, setTooltipRef, setTriggerRef } = usePopperTooltip({
     trigger: "click",
-    onVisibleChange: (state) => setVisible(state),
+    // closeOnOutsideClick: false,
   });
 
-  const [option, setOption] = React.useState<SelectComponentOption>();
-
-  const clickHandler = (o: SelectComponentOption) => {
+  const optionChangeHandler = (o: SelectComponentOption) => {
     setOption(o);
-    setVisible(false);
     onChange(o);
+    setVisible(false);
+
+    const input = selectRef.current;
+
+    if (!input) {
+      return;
+    }
+
+    // @ts-ignore
+    const nativeInputValueSetter = Object.getOwnPropertyDescriptor(
+      HTMLInputElement.prototype,
+      "value"
+    ).set;
+
+    if (!nativeInputValueSetter) {
+      return;
+    }
+
+    nativeInputValueSetter.call(input, JSON.stringify(o));
+    input.dispatchEvent(new Event("input", { bubbles: true }));
   };
 
   const optionsList = (
@@ -54,7 +75,7 @@ const Select: React.FC<ISelect> = (props) => {
         <StyledOption
           key={`${o.key}-${i}`}
           selected={o.key === option?.key}
-          onClick={() => clickHandler(o)}
+          onClick={() => optionChangeHandler(o)}
         >
           {o.value}
         </StyledOption>
@@ -75,7 +96,13 @@ const Select: React.FC<ISelect> = (props) => {
 
   return (
     <>
-      <StyledSelect className={className} ref={setTriggerRef} focus={visible}>
+      <HiddenSelect name={name} ref={selectRef} />
+      <StyledSelect
+        className={className}
+        ref={setTriggerRef}
+        focus={visible}
+        onClick={() => setVisible(!visible)}
+      >
         <StyledValue>
           {option ? option?.value : <Placeholder>{placeholder}</Placeholder>}
         </StyledValue>
@@ -86,13 +113,17 @@ const Select: React.FC<ISelect> = (props) => {
   );
 };
 
+const HiddenSelect = styled.input`
+  visibility: hidden;
+  display: none;
+`;
+
 const Placeholder = styled.div`
   ${InputPlaceholder}
   padding: 3px 5px;
 `;
 
 const StyledOption = styled.div<{ selected?: boolean }>`
-  ${({ selected }) => selected && `background-color: #fd5;`}
   ${InputTransitions}
   ${InputTypography}
   padding: 5px 10px;
@@ -101,6 +132,7 @@ const StyledOption = styled.div<{ selected?: boolean }>`
   &:hover {
     background-color: #fff3b6;
   }
+  ${({ selected }) => selected && `background-color: #fd5;`}
 `;
 
 const StyledValue = styled.div`

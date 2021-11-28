@@ -4,14 +4,15 @@ import { ICheckbox } from "./types";
 import { InputTransitions, InputBorders, InputTypography } from "../styles";
 
 const Checkbox: React.FC<ICheckbox> = (props) => {
-  const { className = "", label = "" } = props;
+  const { className = "", label = "", name } = props;
 
-  const [checked, setChecked] = React.useState<boolean>(true);
+  const [checked, setChecked] = React.useState<boolean>(false);
 
   return (
     <StyledContainer className={className}>
       <CheckboxContainer>
         <HiddenCheckbox
+          name={name}
           checked={checked}
           onChange={(e) => setChecked(e?.target?.checked)}
         />

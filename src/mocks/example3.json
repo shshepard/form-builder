@@ -1,27 +1,30 @@
-[
-  {
-    "id": "name",
-    "type": "text",
-    "label": "Имя",
-    "required": true,
-    "hint": "Введите имя"
-  },
-  {
-    "id": "surname",
-    "type": "text",
-    "label": "Фамилия",
-    "required": true,
-    "hint": "Введите фамилию"
-  },
-  {
-    "type": "select",
-    "label": "Город",
-    "hint": "Выберете город"
-  },
-  {
-    "id": "check",
-    "type": "checkbox",
-    "label": "Согласен",
-    "required": true
-  }
-]
+{
+  "title": "Форма 3",
+  "components": [
+    {
+      "id": "name",
+      "type": "text",
+      "label": "Имя",
+      "required": true,
+      "hint": "Введите имя"
+    },
+    {
+      "id": "surname",
+      "type": "text",
+      "label": "Фамилия",
+      "required": true,
+      "hint": "Введите фамилию"
+    },
+    {
+      "type": "select",
+      "label": "Город",
+      "hint": "Выберете город"
+    },
+    {
+      "id": "check",
+      "type": "checkbox",
+      "label": "Согласен",
+      "required": true
+    }
+  ]
+}

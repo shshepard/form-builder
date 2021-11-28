@@ -6,10 +6,35 @@ import Row, { StyledRow } from "./components/Row";
 import Control, { StyledControl } from "./components/Control";
 import Hint, { StyledHint } from "./components/Hint";
 import Label, { StyledLabel } from "./components/Label";
+import Title, { StyledTitle } from "./components/Title";
+import Submit, { StyledSubmit } from "./components/Submit";
 
 const Form: React.FC<IForm> = (props) => {
-  const { className, children } = props;
-  return <StyledForm className={className}>{children}</StyledForm>;
+  const { className, children, initValues = {} } = props;
+
+  const [formData, updateFormData] = React.useState(initValues);
+
+  const handleChange = (e: React.ChangeEvent<HTMLFormElement>) => {
+    updateFormData({
+      ...formData,
+      [e.target.name]: e.target.value.trim(),
+    });
+  };
+
+  const handleSubmit = (e: React.FormEvent) => {
+    e.preventDefault();
+    console.log("FORM SUBMIT", formData);
+  };
+
+  return (
+    <StyledForm
+      onSubmit={handleSubmit}
+      onChange={handleChange}
+      className={className}
+    >
+      {children}
+    </StyledForm>
+  );
 };
 
 const StyledForm = styled.form`
@@ -17,6 +42,12 @@ const StyledForm = styled.form`
   flex-direction: column;
   > * {
     margin-bottom: 8px;
+  }
+  ${StyledTitle} {
+    margin-bottom: 60px;
+  }
+  ${StyledSubmit} {
+    width: 120px;
   }
   ${StyledRow} {
     display: flex;
@@ -39,4 +70,6 @@ export default Object.assign(Form, {
   Control,
   Hint,
   Label,
+  Title,
+  Submit,
 });

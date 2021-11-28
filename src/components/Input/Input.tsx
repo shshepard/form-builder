@@ -9,8 +9,8 @@ import {
 import { IInput } from "./types";
 
 const Input: React.FC<IInput> = (props) => {
-  const { className } = props;
-  return <StyledInput className={className} />;
+  const { className, name } = props;
+  return <StyledInput className={className} name={name} />;
 };
 
 const StyledInput = styled.input`

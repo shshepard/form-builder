@@ -5,4 +5,5 @@ export interface IControl {
   type: FormComponentType;
   hint?: React.ReactNode;
   props?: any;
+  name: string;
 }

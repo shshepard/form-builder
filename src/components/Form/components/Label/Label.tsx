@@ -13,7 +13,9 @@ const Label: React.FC<ILabel> = (props) => {
   );
 };
 
-const Required = styled.span``;
+const Required = styled.span`
+  color: red;
+`;
 
 export const StyledLabel = styled.span`
   ${InputTypography}

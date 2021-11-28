@@ -1,4 +1,5 @@
 export interface IButton {
   className?: string;
-  label: string;
+  children: string;
+  type?: "submit" | "reset" | "button";
 }

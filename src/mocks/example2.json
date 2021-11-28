@@ -1,34 +1,65 @@
-[
-  {
-    "id": "name",
-    "type": "text",
-    "label": "Имя",
-    "required": true,
-    "hint": "Введите имя"
-  },
-  {
-    "id": "surname",
-    "type": "text",
-    "label": "Фамилия",
-    "required": true,
-    "hint": "Введите фамилию"
-  },
-  {
-    "id": "county",
-    "type": "select",
-    "label": "Страна",
-    "hint": "Выберете страну"
-  },
-  {
-    "id": "city",
-    "type": "select",
-    "label": "Город",
-    "hint": "Выберете город"
-  },
-  {
-    "id": "check",
-    "type": "checkbox",
-    "label": "Согласен",
-    "required": true
-  }
-]
+{
+  "title": "Форма 2",
+  "submitText": "Далее",
+  "components": [
+    {
+      "id": "name",
+      "label": "Имя",
+      "required": true,
+      "hint": "Введите имя",
+      "component": {
+        "type": "text"
+      }
+    },
+    {
+      "id": "surname",
+      "label": "Фамилия",
+      "required": true,
+      "hint": "Введите фамилию",
+      "component": {
+        "type": "text"
+      }
+    },
+    {
+      "id": "county",
+      "label": "Страна",
+      "hint": "Выберете страну",
+      "component": {
+        "type": "select",
+        "params": {
+          "options": [
+            { "key": 1, "value": "Россия" },
+            { "key": 2, "value": "Франция" },
+            { "key": 3, "value": "Турция" }
+          ]
+        }
+      }
+    },
+    {
+      "id": "city",
+      "label": "Город",
+      "hint": "Выберете город",
+      "component": {
+        "type": "select",
+        "params": {
+          "options": [
+            { "key": 1, "value": "Москва" },
+            { "key": 2, "value": "Омск" },
+            { "key": 3, "value": "Санкт-Петербург" }
+          ]
+        }
+      }
+    },
+    {
+      "id": "check",
+      "label": "Согласен",
+      "required": true,
+      "component": {
+        "type": "checkbox",
+        "params": {
+          "label": "Даю согласие на обработку данных"
+        }
+      }
+    }
+  ]
+}

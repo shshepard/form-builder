@@ -4,11 +4,15 @@ import { IButton } from "./types";
 import { InputStyles, InputTransitions } from "../styles";
 
 const Button: React.FC<IButton> = (props) => {
-  const { className, label } = props;
-  return <StyledButton className={className}>{label}</StyledButton>;
+  const { className, children, type } = props;
+  return (
+    <StyledButton className={className} type={type}>
+      {children}
+    </StyledButton>
+  );
 };
 
-const StyledButton = styled.button`
+export const StyledButton = styled.button`
   ${InputStyles}
   ${InputTransitions}
   min-width: 120px;

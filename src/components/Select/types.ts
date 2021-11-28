@@ -6,4 +6,5 @@ export interface ISelect {
   defaultValue?: SelectComponentOption;
   placeholder?: string;
   onChange?: (v: SelectComponentOption) => void;
+  name?: string;
 }

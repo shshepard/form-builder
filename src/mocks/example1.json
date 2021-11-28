@@ -1,28 +1,51 @@
-[
-  {
-    "id": "name",
-    "type": "text",
-    "label": "Имя",
-    "required": true,
-    "hint": "Введите имя"
-  },
-  {
-    "id": "surname",
-    "type": "text",
-    "label": "Фамилия",
-    "required": true,
-    "hint": "Введите фамилию"
-  },
-  {
-    "id": "city",
-    "type": "select",
-    "label": "Город",
-    "hint": "Выберете город"
-  },
-  {
-    "id": "check",
-    "type": "checkbox",
-    "label": "Согласен",
-    "required": true
-  }
-]
+{
+  "title": "Форма 1",
+  "submitText": "Подтвердить",
+  "components": [
+    {
+      "id": "name",
+      "label": "Имя",
+      "required": true,
+      "hint": "Введите имя",
+      "component": {
+        "type": "text"
+      }
+    },
+    {
+      "id": "surname",
+      "label": "Фамилия",
+      "required": true,
+      "hint": "Введите фамилию",
+      "component": {
+        "type": "text"
+      }
+    },
+    {
+      "id": "city",
+      "label": "Город",
+      "hint": "Выберете город",
+      "component": {
+        "type": "select",
+        "params": {
+          "options": [
+            { "key": 1, "value": "Москва" },
+            { "key": 2, "value": "Омск" },
+            { "key": 3, "value": "Санкт-Петербург" }
+          ]
+        }
+      }
+    },
+    {
+      "id": "check",
+      "type": "checkbox",
+      "label": "Согласен",
+      "required": true,
+      "component": {
+        "type": "checkbox",
+        "params": {
+          "label": "Даю согласие на обработку данных"
+        }
+      }
+    }
+  ]
+}

@@ -23,22 +23,28 @@ export interface TextComponent extends AbsctractFormComponent {
   defaultValue: string;
 }
 
-export type CheckboxGroupComponentOption = {
-  key: string | number;
-  value: boolean;
-  label: string;
-};
-
 export interface CheckboxComponent extends AbsctractFormComponent {
   defaultValue: boolean;
 }
-
-export interface AbstractFormElement {
+export interface ComponentDefinition {
   id: string;
   label?: string;
-  type: FormComponentType;
   hint?: string;
   required?: boolean;
+  component: {
+    type: FormComponentType;
+    params?: CheckboxComponent | TextComponent | SelectComponent;
+  };
 }
 
-export type FormSchema = AbstractFormElement[];
+export type FormSchema = {
+  title?: string;
+  submitText?: string;
+  components: ComponentDefinition[];
+};
+
+export enum SchemaValidity {
+  VALID = "VALID",
+  INVALID = "INVALID",
+  UNKNOWN = "UNKNOWN",
+}
